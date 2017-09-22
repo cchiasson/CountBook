@@ -42,7 +42,6 @@ import com.google.gson.reflect.TypeToken;
 */
 public class MainActivity extends AppCompatActivity {
     private static final String FILENAME = "file.sav";
-    private EditText bodyText;
     private ListView oldCountersList;
 
     private ArrayList<Counter> CountList;
@@ -51,28 +50,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        oldCountersList = (ListView) findViewById(R.id.list_item);
+        Button createButton = (Button) findViewById(R.id.create);
+        oldCountersList = (ListView) findViewById(R.id.oldCountersList);
         //oldCountersList.setOnItemClickListener(this);
 
         //ADD NEW COUNTER BUTTON
-        FloatingActionButton addCounter = (FloatingActionButton) findViewById(R.id.fab);
-        addCounter.setOnClickListener(new View.OnClickListener() {
-            @Override
+        createButton.setOnClickListener(new View.OnClickListener() {
+
             public void onClick(View view) {
                 setResult(RESULT_OK);
-                //Intent intent = new Intent(this, CreateCounterActivity.class);
                 startActivity(new Intent(MainActivity.this,CreateCounterActivity.class));
-                /*
-                String name = bodyText.getText().toString();
-                int value = Integer.parseInt(bodyText.getText().toString());
-                Counter newCounter = new Counter(name,value);
-                CountList.add(newCounter);*/
-                //test???
-                //adapter.notifyDataSetChanged();
-                //loadFromFile();
             }
         });
     }
@@ -82,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         loadFromFile();
         adapter = new ArrayAdapter<Counter>(this,
-                R.layout.content_main, CountList);
+                R.layout.list_item, CountList);
         oldCountersList.setAdapter(adapter);
     }
     //CLICK ON COUNTER

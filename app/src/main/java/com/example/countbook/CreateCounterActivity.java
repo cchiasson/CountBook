@@ -9,12 +9,17 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 
@@ -28,6 +33,10 @@ public class CreateCounterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_counter);
+        loadFromFile();
+        adapter = new ArrayAdapter<Counter>(this,
+                R.layout.list_item, CountList);
+
     }
     public void createCounter(View view) {
         Intent intent = new Intent(CreateCounterActivity.this,MainActivity.class);
@@ -37,9 +46,9 @@ public class CreateCounterActivity extends AppCompatActivity {
         int value = Integer.parseInt(editText2.getText().toString());
         Counter newCounter = new Counter(name,value);
         //PROBLEM STARTS HERE
-        //CountList.add(newCounter);
-        //adapter.notifyDataSetChanged();
-        //saveInFile();
+        CountList.add(newCounter);
+        adapter.notifyDataSetChanged();
+        saveInFile();
         finish();
     }
     private void saveInFile() {
@@ -55,6 +64,28 @@ public class CreateCounterActivity extends AppCompatActivity {
         } catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        }
+    }
+    private void loadFromFile() {
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+
+            Gson gson = new Gson();
+
+            //Taken from https://stackoverflow.com/questions/43345046/converting-a-json-string-to-an-arraylist-of-objects-with-gson
+            //2017-09-19
+            Type listType = new TypeToken<ArrayList<Counter>>() {
+            }.getType();
+            CountList = gson.fromJson(in, listType);
+
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            CountList = new ArrayList<Counter>();
         } catch (IOException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException();

@@ -11,6 +11,7 @@ public class Counter {
     private Date date;
     private int initialValue;
     private int currentValue;
+    private String comment;
     public Counter(String name, int value) {
         this.name = name;
         this.date = new Date();
@@ -37,6 +38,6 @@ public class Counter {
     }
     @Override
     public String toString() {
-        return name+" | "+currentValue+" | "+initialValue+" | "+date.toString();
+        return name+" | Current Value: "+currentValue+" | Initial Value: "+initialValue+" | "+date.toString();
     }
 }
