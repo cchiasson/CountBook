@@ -42,11 +42,18 @@ public class CreateCounterActivity extends AppCompatActivity {
         Intent intent = new Intent(CreateCounterActivity.this,MainActivity.class);
         EditText editText = (EditText) findViewById(R.id.editText);
         EditText editText2 = (EditText) findViewById(R.id.editText2);
+        EditText editText3 = (EditText) findViewById(R.id.editText3);
+        String comment = editText3.getText().toString();
         String name = editText.getText().toString();
         int value = Integer.parseInt(editText2.getText().toString());
-        Counter newCounter = new Counter(name,value);
-        //PROBLEM STARTS HERE
-        CountList.add(newCounter);
+        if (comment !=null) {
+            Counter newCounter = new Counter(name,value,comment);
+            CountList.add(newCounter);
+        }
+        else {
+            Counter newCounter = new Counter(name, value);
+            CountList.add(newCounter);
+        }
         adapter.notifyDataSetChanged();
         saveInFile();
         finish();

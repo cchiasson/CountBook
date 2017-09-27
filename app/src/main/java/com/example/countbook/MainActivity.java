@@ -8,7 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
-import android.view.MenuItem;import java.io.BufferedReader;
+import android.view.MenuItem;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -21,7 +22,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import android.app.Activity;
+import android.app.ListActivity;
+import android.content.Intent;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -50,11 +52,22 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
 
         Button createButton = (Button) findViewById(R.id.create);
+        //adapted from https://stackoverflow.com/questions/14175153/how-to-make-my-listview-items-clickable
+        //25-09-2017
         oldCountersList = (ListView) findViewById(R.id.oldCountersList);
-        //oldCountersList.setOnItemClickListener(this);
+        oldCountersList.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> a, View v, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, CounterDetail.class);
+                intent.putExtra("position", position);
+                intent.putExtra("id",id);
+                startActivity(intent);
+            }
+        });
 
         //ADD NEW COUNTER BUTTON
         createButton.setOnClickListener(new View.OnClickListener() {
@@ -74,15 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 R.layout.list_item, CountList);
         oldCountersList.setAdapter(adapter);
     }
-    //CLICK ON COUNTER
-    /*public void onItemClick(AdapterView<?> l,View v, int position,long id) {
-        Log.i("HelloListView", "You clicked Item: "+id+" at position: "+position);
-            Intent intent = new Intent();
-        intent.setClass(this,CounterDetail.class);
-        intent.putExtra("position",position);
-        intent.putExtra("id",id);
-        startActivity(intent);
-    }*/
     private void loadFromFile() {
         try {
             FileInputStream fis = openFileInput(FILENAME);
