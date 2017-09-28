@@ -45,8 +45,8 @@ public class Counter {
         return this.date.toString();
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setDate() {
+        this.date = new Date();
     }
 
     public int getCurrentValue() {

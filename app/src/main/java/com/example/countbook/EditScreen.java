@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.gson.Gson;
@@ -22,41 +23,42 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-
-public class CreateCounterActivity extends AppCompatActivity {
+public class EditScreen extends AppCompatActivity {
     private static final String FILENAME = "file.sav";
     private ArrayList<Counter> CountList;
-    private ArrayAdapter<Counter> adapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_counter);
-        loadFromFile();
-        adapter = new ArrayAdapter<Counter>(this,
-                R.layout.list_item, CountList);
+        setContentView(R.layout.activity_edit_screen);
+        Intent intent = getIntent();
+        final int position = intent.getIntExtra("position",0);
 
-    }
-    public void createCounter(View view) {
-        Intent intent = new Intent(CreateCounterActivity.this,MainActivity.class);
-        EditText editText = (EditText) findViewById(R.id.Name);
-        EditText editText2 = (EditText) findViewById(R.id.initialVal);
-        EditText editText3 = (EditText) findViewById(R.id.editText3);
-        String comment = editText3.getText().toString();
-        String name = editText.getText().toString();
-        int value = Integer.parseInt(editText2.getText().toString());
-        if (comment !=null) {
-            Counter newCounter = new Counter(name,value,comment);
-            CountList.add(newCounter);
-        }
-        else {
-            Counter newCounter = new Counter(name, value);
-            CountList.add(newCounter);
-        }
-        adapter.notifyDataSetChanged();
-        saveInFile();
-        finish();
+        loadFromFile();
+
+        final Counter counter = CountList.get(position);
+        String comment = counter.getComment();
+        String name = counter.getName();
+        int currentValue = counter.getCurrentValue();
+        int initialValue = counter.getInitialValue();
+
+        EditText Name = (EditText) findViewById(R.id.Name);
+        EditText initialVal = (EditText) findViewById(R.id.initialVal);
+        EditText currentVal = (EditText) findViewById(R.id.currentVal);
+        EditText Comment = (EditText) findViewById(R.id.Comment);
+        Button save = (Button) findViewById(R.id.save);
+
+        Name.setHint("Name: "+name);
+        initialVal.setHint("Initial Value: "+Integer.toString(initialValue));
+        currentVal.setHint("Current Value: "+Integer.toString(currentValue));
+        Comment.setHint("Comment: "+comment);
+
+        save.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                setResult(RESULT_OK);
+                finish();
+            }
+        });
     }
     private void saveInFile() {
         try {
@@ -98,5 +100,4 @@ public class CreateCounterActivity extends AppCompatActivity {
             throw new RuntimeException();
         }
     }
-
 }

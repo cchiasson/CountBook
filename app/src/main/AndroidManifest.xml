@@ -19,10 +19,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CounterDetail"
+        <activity
+            android:name=".CounterDetail"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".CreateCounterActivity"
-            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".CreateCounterActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".EditScreen"></activity>
     </application>
 
 </manifest>
