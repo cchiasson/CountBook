@@ -1,5 +1,6 @@
 package com.example.countbook;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -42,7 +43,8 @@ public class Counter {
     }
 
     public String getDate() {
-        return this.date.toString();
+        SimpleDateFormat properFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return properFormat.format(this.date);
     }
 
     public void setDate() {
@@ -70,10 +72,23 @@ public class Counter {
         this.currentValue = this.initialValue;
         this.date = new Date();
     }
+    public void setName(String newName) {
+        this.name = newName;
+    }
+    public void setComment(String newComment) {
+        this.comment = newComment;
+    }
+    public void setInitialValue(int newInitial) {
+        this.initialValue = newInitial;
+    }
+    public void setCurrentValue(int newCurrent) {
+        this.currentValue = newCurrent;
+    }
 
     @Override
     public String toString() {
-        return name+" | Current Value: "+currentValue+" | Initial Value: "+initialValue+" | "+date.toString();
+        SimpleDateFormat properFormat = new SimpleDateFormat("yyyy-MM-dd");
+        return name+" | Current Value: "+currentValue+" | Initial Value: "+initialValue+" \n"+properFormat.format(date);
     }
 
 }

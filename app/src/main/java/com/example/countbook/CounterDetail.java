@@ -123,6 +123,78 @@ public class CounterDetail extends AppCompatActivity {
         Intent intent = getIntent();
         final int position = intent.getIntExtra("position",0);
         loadFromFile();
+        final Counter counter = CountList.get(position);
+        String comment = counter.getComment();
+        String name = counter.getName();
+        String date = counter.getDate();
+        int currentValue = counter.getCurrentValue();
+        int initialValue = counter.getInitialValue();
+
+        TextView Name = (TextView) findViewById(R.id.Name);
+        TextView Comment = (TextView) findViewById(R.id.Comment);
+        final TextView Count = (TextView) findViewById(R.id.Count);
+        TextView InitialValue = (TextView) findViewById(R.id.initialValue);
+        final TextView Date = (TextView) findViewById(R.id.Date);
+        Button Reset = (Button) findViewById(R.id.Reset);
+        Button Decrement = (Button) findViewById(R.id.Decrement);
+        Button Increment = (Button) findViewById(R.id.Increment);
+        Button Edit = (Button) findViewById(R.id.edit);
+        Button Delete = (Button) findViewById(R.id.delete);
+
+        Name.setText(name);
+        Comment.setText(comment);
+        Count.setText(Integer.toString(currentValue));
+        InitialValue.setText("Started at: "+Integer.toString(initialValue));
+        Date.setText("Last modified: "+date);
+        Reset.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                setResult(RESULT_OK);
+                counter.resetCount();
+                counter.setDate();
+                Count.setText(Integer.toString(counter.getCurrentValue()));
+                Date.setText("Last modified: "+counter.getDate());
+                CountList.set(position,counter);
+                saveInFile();
+            }
+        });
+        Decrement.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                setResult(RESULT_OK);
+                counter.changeCount(-1);
+                counter.setDate();
+                Count.setText(Integer.toString(counter.getCurrentValue()));
+                Date.setText("Last modified: "+counter.getDate());
+                CountList.set(position,counter);
+                saveInFile();
+            }
+        });
+        Increment.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                setResult(RESULT_OK);
+                counter.changeCount(1);
+                counter.setDate();
+                Count.setText(Integer.toString(counter.getCurrentValue()));
+                Date.setText("Last modified: "+counter.getDate());
+                CountList.set(position,counter);
+                saveInFile();
+            }
+        });
+        Edit.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                setResult(RESULT_OK);
+                Intent intent = new Intent(CounterDetail.this, EditScreen.class);
+                intent.putExtra("position", position);
+                startActivity(intent);
+            }
+        });
+        Delete.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                setResult(RESULT_OK);
+                CountList.remove(position);
+                saveInFile();
+                finish();
+            }
+        });
     }
     private void saveInFile() {
         try {

@@ -45,14 +45,23 @@ public class CreateCounterActivity extends AppCompatActivity {
         EditText editText3 = (EditText) findViewById(R.id.editText3);
         String comment = editText3.getText().toString();
         String name = editText.getText().toString();
-        int value = Integer.parseInt(editText2.getText().toString());
-        if (comment !=null) {
+        int value;
+        if (editText2.getText().toString().trim().equals("")) {
+            value = -1;
+        }
+        else {
+            value = Integer.parseInt(editText2.getText().toString());
+        }
+        if (!comment.isEmpty() && !name.isEmpty() && value>=0) {
             Counter newCounter = new Counter(name,value,comment);
             CountList.add(newCounter);
         }
-        else {
+        else if (!name.isEmpty() && value>=0){
             Counter newCounter = new Counter(name, value);
             CountList.add(newCounter);
+        }
+        else {
+            finish();
         }
         adapter.notifyDataSetChanged();
         saveInFile();

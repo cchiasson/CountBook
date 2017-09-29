@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -40,22 +42,40 @@ public class EditScreen extends AppCompatActivity {
         String comment = counter.getComment();
         String name = counter.getName();
         int currentValue = counter.getCurrentValue();
-        int initialValue = counter.getInitialValue();
+        final int initialValue = counter.getInitialValue();
 
-        EditText Name = (EditText) findViewById(R.id.Name);
-        EditText initialVal = (EditText) findViewById(R.id.initialVal);
-        EditText currentVal = (EditText) findViewById(R.id.currentVal);
-        EditText Comment = (EditText) findViewById(R.id.Comment);
+        final EditText Name = (EditText) findViewById(R.id.Name);
+        final EditText initialVal = (EditText) findViewById(R.id.initialVal);
+        final EditText currentVal = (EditText) findViewById(R.id.currentVal);
+        final EditText Comment = (EditText) findViewById(R.id.Comment);
         Button save = (Button) findViewById(R.id.save);
+        save.setEnabled(true);
 
-        Name.setHint("Name: "+name);
-        initialVal.setHint("Initial Value: "+Integer.toString(initialValue));
-        currentVal.setHint("Current Value: "+Integer.toString(currentValue));
-        Comment.setHint("Comment: "+comment);
+        Name.setText(name);
+        Name.setHint("Name");
+        initialVal.setText(Integer.toString(initialValue));
+        initialVal.setHint("Initial Value");
+        currentVal.setText(Integer.toString(currentValue));
+        currentVal.setHint("Current Value");
+        Comment.setText(comment);
+        Comment.setHint("Comment (Optional)");
 
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 setResult(RESULT_OK);
+                if (Name.getText().toString() != null) {
+                    counter.setName(Name.getText().toString());
+                };
+                if (initialVal.getText().toString()!=null) {
+                    counter.setInitialValue(Integer.parseInt(initialVal.getText().toString()));
+                }
+                if (currentVal.getText().toString()!=null) {
+                    counter.setCurrentValue(Integer.parseInt(currentVal.getText().toString()));
+                }
+                counter.setComment(Comment.getText().toString());
+                counter.setDate();
+                CountList.set(position,counter);
+                saveInFile();
                 finish();
             }
         });

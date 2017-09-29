@@ -34,9 +34,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.w3c.dom.Text;
 
 /*
 import com.google.gson.Gson;
@@ -56,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button createButton = (Button) findViewById(R.id.create);
+        TextView title = (TextView) findViewById(R.id.oldCountersTitle);
         //adapted from https://stackoverflow.com/questions/14175153/how-to-make-my-listview-items-clickable
         //25-09-2017
         oldCountersList = (ListView) findViewById(R.id.oldCountersList);
@@ -82,9 +86,12 @@ public class MainActivity extends AppCompatActivity {
         // TODO Auto-generated method stub
         super.onStart();
         loadFromFile();
+        TextView title = (TextView) findViewById(R.id.oldCountersTitle);
+        title.setText("Counters: "+CountList.size());
         adapter = new ArrayAdapter<Counter>(this,
                 R.layout.list_item, CountList);
         oldCountersList.setAdapter(adapter);
+
     }
     private void loadFromFile() {
         try {
