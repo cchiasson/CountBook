@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Created by chias on 2017-09-21.
+ * @author chias
  */
 
 public class Counter {
