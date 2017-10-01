@@ -16,12 +16,12 @@
         "source": "C:\\Users\\chias\\.android\\build-cache\\3a7260e96c91c295b8d8f14ea7e8f188d4a01f20\\output\\res\\anim\\abc_slide_in_bottom.xml"
     },
     {
-        "merged": "C:\\Users\\chias\\Documents\\Year 4\\Fall\\CMPUT 301\\Assignment\\chiasson-CountBook\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
-        "source": "C:\\Users\\chias\\.android\\build-cache\\3a7260e96c91c295b8d8f14ea7e8f188d4a01f20\\output\\res\\anim\\abc_fade_in.xml"
-    },
-    {
         "merged": "C:\\Users\\chias\\Documents\\Year 4\\Fall\\CMPUT 301\\Assignment\\chiasson-CountBook\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
         "source": "C:\\Users\\chias\\.android\\build-cache\\3a7260e96c91c295b8d8f14ea7e8f188d4a01f20\\output\\res\\anim\\abc_popup_enter.xml"
+    },
+    {
+        "merged": "C:\\Users\\chias\\Documents\\Year 4\\Fall\\CMPUT 301\\Assignment\\chiasson-CountBook\\app\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
+        "source": "C:\\Users\\chias\\.android\\build-cache\\3a7260e96c91c295b8d8f14ea7e8f188d4a01f20\\output\\res\\anim\\abc_fade_in.xml"
     },
     {
         "merged": "C:\\Users\\chias\\Documents\\Year 4\\Fall\\CMPUT 301\\Assignment\\chiasson-CountBook\\app\\build\\intermediates\\res\\merged\\debug\\anim\\design_bottom_sheet_slide_out.xml",

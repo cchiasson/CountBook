@@ -20,12 +20,12 @@
         "source": "C:\\Users\\chias\\.android\\build-cache\\3a7260e96c91c295b8d8f14ea7e8f188d4a01f20\\output\\res\\drawable\\notification_icon_background.xml"
     },
     {
-        "merged": "C:\\Users\\chias\\Documents\\Year 4\\Fall\\CMPUT 301\\Assignment\\CountBook\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_track_material.xml",
-        "source": "C:\\Users\\chias\\.android\\build-cache\\3a7260e96c91c295b8d8f14ea7e8f188d4a01f20\\output\\res\\drawable\\abc_seekbar_track_material.xml"
-    },
-    {
         "merged": "C:\\Users\\chias\\Documents\\Year 4\\Fall\\CMPUT 301\\Assignment\\chiasson-CountBook\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_tick_mark_material.xml",
         "source": "C:\\Users\\chias\\.android\\build-cache\\3a7260e96c91c295b8d8f14ea7e8f188d4a01f20\\output\\res\\drawable\\abc_seekbar_tick_mark_material.xml"
+    },
+    {
+        "merged": "C:\\Users\\chias\\Documents\\Year 4\\Fall\\CMPUT 301\\Assignment\\CountBook\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_seekbar_track_material.xml",
+        "source": "C:\\Users\\chias\\.android\\build-cache\\3a7260e96c91c295b8d8f14ea7e8f188d4a01f20\\output\\res\\drawable\\abc_seekbar_track_material.xml"
     },
     {
         "merged": "C:\\Users\\chias\\Documents\\Year 4\\Fall\\CMPUT 301\\Assignment\\chiasson-CountBook\\app\\build\\intermediates\\res\\merged\\debug\\drawable\\abc_list_selector_holo_dark.xml",
