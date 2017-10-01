@@ -2,49 +2,23 @@ package com.example.countbook;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import android.app.ListActivity;
-import android.content.Intent;
-import android.content.Context;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import org.w3c.dom.Text;
-
-/*
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-*/
 public class MainActivity extends AppCompatActivity {
     private static final String FILENAME = "file.sav";
     private ListView oldCountersList;
@@ -60,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button createButton = (Button) findViewById(R.id.create);
         TextView title = (TextView) findViewById(R.id.oldCountersTitle);
+
         //adapted from https://stackoverflow.com/questions/14175153/how-to-make-my-listview-items-clickable
         //25-09-2017
         oldCountersList = (ListView) findViewById(R.id.oldCountersList);
@@ -72,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //ADD NEW COUNTER BUTTON
         createButton.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
@@ -93,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
         oldCountersList.setAdapter(adapter);
 
     }
+
+    /**
+     * Loads list of counters from file
+     */
     private void loadFromFile() {
         try {
             FileInputStream fis = openFileInput(FILENAME);
@@ -115,26 +93,4 @@ public class MainActivity extends AppCompatActivity {
             throw new RuntimeException();
         }
     }
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 }

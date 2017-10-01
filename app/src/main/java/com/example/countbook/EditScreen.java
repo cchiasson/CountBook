@@ -25,6 +25,9 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+/**
+ * Edit Screen Activity
+ */
 public class EditScreen extends AppCompatActivity {
     private static final String FILENAME = "file.sav";
     private ArrayList<Counter> CountList;
@@ -49,7 +52,6 @@ public class EditScreen extends AppCompatActivity {
         final EditText currentVal = (EditText) findViewById(R.id.currentVal);
         final EditText Comment = (EditText) findViewById(R.id.Comment);
         Button save = (Button) findViewById(R.id.save);
-        save.setEnabled(true);
 
         Name.setText(name);
         Name.setHint("Name");
@@ -63,13 +65,13 @@ public class EditScreen extends AppCompatActivity {
         save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 setResult(RESULT_OK);
-                if (Name.getText().toString() != null) {
+                if (!Name.getText().toString().isEmpty()) {
                     counter.setName(Name.getText().toString());
                 };
-                if (initialVal.getText().toString()!=null) {
+                if (!initialVal.getText().toString().isEmpty()) {
                     counter.setInitialValue(Integer.parseInt(initialVal.getText().toString()));
                 }
-                if (currentVal.getText().toString()!=null) {
+                if (!currentVal.getText().toString().isEmpty()) {
                     counter.setCurrentValue(Integer.parseInt(currentVal.getText().toString()));
                 }
                 counter.setComment(Comment.getText().toString());
@@ -80,6 +82,10 @@ public class EditScreen extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Saves Counter info in file containing all counters
+     */
     private void saveInFile() {
         try {
             FileOutputStream fos = openFileOutput(FILENAME,
@@ -90,14 +96,20 @@ public class EditScreen extends AppCompatActivity {
             gson.toJson(CountList, out);
             out.flush();
             fos.close();
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException();
         }
     }
+
+    /**
+     * Loads list of counters from file
+     */
     private void loadFromFile() {
         try {
             FileInputStream fis = openFileInput(FILENAME);
@@ -109,13 +121,14 @@ public class EditScreen extends AppCompatActivity {
             //2017-09-19
             Type listType = new TypeToken<ArrayList<Counter>>() {
             }.getType();
+
             CountList = gson.fromJson(in, listType);
-
-
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             CountList = new ArrayList<Counter>();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException();
         }

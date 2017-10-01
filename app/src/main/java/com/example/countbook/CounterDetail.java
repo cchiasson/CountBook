@@ -26,6 +26,9 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Counter Detail Summary Activity
+ */
 public class CounterDetail extends AppCompatActivity {
     private static final String FILENAME = "file.sav";
     private ArrayList<Counter> CountList;
@@ -122,7 +125,9 @@ public class CounterDetail extends AppCompatActivity {
         super.onStart();
         Intent intent = getIntent();
         final int position = intent.getIntExtra("position",0);
+
         loadFromFile();
+
         final Counter counter = CountList.get(position);
         String comment = counter.getComment();
         String name = counter.getName();
@@ -146,6 +151,7 @@ public class CounterDetail extends AppCompatActivity {
         Count.setText(Integer.toString(currentValue));
         InitialValue.setText("Started at: "+Integer.toString(initialValue));
         Date.setText("Last modified: "+date);
+
         Reset.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 setResult(RESULT_OK);
@@ -157,6 +163,7 @@ public class CounterDetail extends AppCompatActivity {
                 saveInFile();
             }
         });
+
         Decrement.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 setResult(RESULT_OK);
@@ -168,6 +175,7 @@ public class CounterDetail extends AppCompatActivity {
                 saveInFile();
             }
         });
+
         Increment.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 setResult(RESULT_OK);
@@ -179,6 +187,7 @@ public class CounterDetail extends AppCompatActivity {
                 saveInFile();
             }
         });
+
         Edit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 setResult(RESULT_OK);
@@ -187,6 +196,7 @@ public class CounterDetail extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         Delete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 setResult(RESULT_OK);
@@ -196,6 +206,10 @@ public class CounterDetail extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Saves Counter info in file containing all counters
+     */
     private void saveInFile() {
         try {
             FileOutputStream fos = openFileOutput(FILENAME,
@@ -214,6 +228,10 @@ public class CounterDetail extends AppCompatActivity {
             throw new RuntimeException();
         }
     }
+
+    /**
+     * Loads list of counters from file
+     */
     private void loadFromFile() {
         try {
             FileInputStream fis = openFileInput(FILENAME);

@@ -22,18 +22,21 @@ import java.io.OutputStreamWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-
+/**
+ * Counter Creation Activity
+ */
 public class CreateCounterActivity extends AppCompatActivity {
     private static final String FILENAME = "file.sav";
     private ArrayList<Counter> CountList;
     private ArrayAdapter<Counter> adapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_counter);
+
         loadFromFile();
+
         adapter = new ArrayAdapter<Counter>(this,
                 R.layout.list_item, CountList);
 
@@ -46,12 +49,14 @@ public class CreateCounterActivity extends AppCompatActivity {
         String comment = editText3.getText().toString();
         String name = editText.getText().toString();
         int value;
+
         if (editText2.getText().toString().trim().equals("")) {
             value = -1;
         }
         else {
             value = Integer.parseInt(editText2.getText().toString());
         }
+
         if (!comment.isEmpty() && !name.isEmpty() && value>=0) {
             Counter newCounter = new Counter(name,value,comment);
             CountList.add(newCounter);
@@ -63,6 +68,7 @@ public class CreateCounterActivity extends AppCompatActivity {
         else {
             finish();
         }
+
         adapter.notifyDataSetChanged();
         saveInFile();
         finish();
@@ -77,14 +83,20 @@ public class CreateCounterActivity extends AppCompatActivity {
             gson.toJson(CountList, out);
             out.flush();
             fos.close();
-        } catch (FileNotFoundException e) {
+        }
+        catch (FileNotFoundException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException();
-        } catch (IOException e) {
+        }
+        catch (IOException e) {
             // TODO Auto-generated catch block
             throw new RuntimeException();
         }
     }
+
+    /**
+     * Loads list of counters from file
+     */
     private void loadFromFile() {
         try {
             FileInputStream fis = openFileInput(FILENAME);
