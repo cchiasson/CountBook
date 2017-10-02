@@ -28,7 +28,6 @@ import java.util.ArrayList;
 public class CreateCounterActivity extends AppCompatActivity {
     private static final String FILENAME = "file.sav";
     private ArrayList<Counter> CountList;
-    private ArrayAdapter<Counter> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +35,6 @@ public class CreateCounterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_counter);
 
         loadFromFile();
-
-        adapter = new ArrayAdapter<Counter>(this,
-                R.layout.list_item, CountList);
-
     }
     public void createCounter(View view) {
         Intent intent = new Intent(CreateCounterActivity.this,MainActivity.class);
@@ -69,7 +64,6 @@ public class CreateCounterActivity extends AppCompatActivity {
             finish();
         }
 
-        adapter.notifyDataSetChanged();
         saveInFile();
         finish();
     }
